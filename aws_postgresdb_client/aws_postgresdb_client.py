@@ -27,3 +27,11 @@ class AwsPostgresDBClient:
         self.__connect()
         self.cur.execute(sql)
         self.conn.commit()
+        self.cur.close()
+
+    def select_sql(self, sql):
+        self.__connect()
+        self.cur.execute(sql)
+        data = self.cur.fetchall()
+        self.cur.close()
+        return data
