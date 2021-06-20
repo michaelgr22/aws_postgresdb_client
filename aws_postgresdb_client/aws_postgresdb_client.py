@@ -1,7 +1,7 @@
 import psycopg2
 
 
-class PostgresDB:
+class AwsPostgresDBClient:
     def __init__(self, host, port, database, user, password):
         self.host = host
         self.port = port
