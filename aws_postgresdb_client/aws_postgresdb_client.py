@@ -30,7 +30,6 @@ class PostgresDB:
 
     def execute_sql(self, sql):
         self.__connect()
-        print(sql)
         self.cur.execute(sql)
         data = None
         try:
