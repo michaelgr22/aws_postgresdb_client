@@ -9,11 +9,9 @@ class AwsPostgresDBClient:
         self.user = user
         self.password = password
         self.conn = None
-        self.cur = None
 
     def __del__(self):
         try:
-            self.cur.close()
             self.conn.close()
         except:
             pass
@@ -25,16 +23,17 @@ class AwsPostgresDBClient:
                                          dbname=self.database,
                                          user=self.user,
                                          password=self.password)
-        if self.cur == None:
-            self.cur = self.conn.cursor()
 
-    def execute_sql(self, sql):
+    def execute_sql(self, sql, autocommit=False):
         self.__connect()
-        self.cur.execute(sql)
+        self.conn.set_session(autocommit=autocommit)
+        cur = self.conn.cursor()
+        cur.execute(sql)
         data = None
         try:
-            data = self.cur.fetchall()
+            data = cur.fetchall()
         except:
             pass
         self.conn.commit()
+        cur.close()
         return data
