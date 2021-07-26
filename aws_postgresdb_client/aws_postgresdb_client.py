@@ -24,11 +24,11 @@ class AwsPostgresDBClient:
                                          user=self.user,
                                          password=self.password)
 
-    def execute_sql(self, sql, autocommit=False):
+    def execute_sql(self, sql, values=(), autocommit=False):
         self.__connect()
         self.conn.set_session(autocommit=autocommit)
         cur = self.conn.cursor()
-        cur.execute(sql)
+        cur.execute(sql, values)
         data = None
         try:
             data = cur.fetchall()
