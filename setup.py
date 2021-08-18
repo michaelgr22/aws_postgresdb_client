@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = '0.0.3'
+VERSION = '0.0.3.1'
 DESCRIPTION = 'postgresdb client for aws python image'
 LONG_DESCRIPTION = 'postgresdb client for aws python image'
 

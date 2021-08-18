@@ -26,6 +26,7 @@ class AwsPostgresDBClient:
 
     def execute_sql(self, sql, values=(), autocommit=False):
         self.__connect()
+        self.conn.rollback()
         self.conn.set_session(autocommit=autocommit)
         cur = self.conn.cursor()
         cur.execute(sql, values)
